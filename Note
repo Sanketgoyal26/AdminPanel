@@ -1,4 +1,4 @@
 In this application Database was created locally.
 so, here I am attaching the data of existing users in the form of CSV file so from there you can import it into mongoDB by giving database
-name "AdminPanel". And rest things will remain same.
+name "AdminPanel" and collection name "existings" in mongoimport command. And rest things will remain same.
 Thankyou
