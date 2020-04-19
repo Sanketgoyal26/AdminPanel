@@ -38,7 +38,17 @@ app.get('/signup', function(req, res)
 
 app.get('/panel', function(req, res)
 {
-    res.render('panel')
+    ExistUser.find({}, function(err, list)
+    {
+        if(err)
+        {
+            console.log("An Error Occured ")
+            console.log(err)
+        }
+        else{
+            res.render('panel',{list:list})
+        }
+    })
 })
 
 app.post("/signup", function (req, res) {

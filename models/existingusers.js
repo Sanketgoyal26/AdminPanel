@@ -10,4 +10,4 @@ var ExistSchema = new mongoose.Schema({
 
 ExistSchema.plugin(passportLocalMongoose);
   
-module.exports = mongoose.model("ExistingUser",ExistSchema);
+module.exports = mongoose.model("Existing",ExistSchema);
