@@ -6,12 +6,14 @@ var User = require("./models/user");
 var ExistUser = require("./models/existingusers");
 var LocalStrategy = require("passport-local");
 var passportLocalMongoose = require("passport-local-mongoose");
+var methodOverride=require('method-override')
 var mongoose=require('mongoose').set('debug', true);
 
 var app=express()
 
 mongoose.connect("mongodb://localhost/AdminPanel")
 app.set('view engine','ejs')
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(require("express-session")({
     secret:"Rusty is the best og in the world",
@@ -19,7 +21,7 @@ app.use(require("express-session")({
     saveUninitialized: false
 }));
 
-
+app.use(methodOverride('_method'))
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -51,6 +53,7 @@ app.get('/panel', function(req, res)
     })
 })
 
+
 app.post("/signup", function (req, res) {
     User.register(new User({ name : req.body.name,username:req.body.username, email: req.body.email}),req.body.password,  function (err, user) {
         if (err) {
@@ -76,6 +79,20 @@ function isLoggedIn(req, res, next) {
     }
     res.redirect("/panel");
 }
+
+app.delete("/panel/:id", function(req, res)
+{
+   ExistUser.findByIdAndRemove(req.params.id, function(err)
+   {
+       if(err)
+       {
+           res.redirect('/panel')
+       }
+       else{
+           res.redirect('/panel')
+       }
+   })
+})
 app.listen(port , function(req, res)
 {
     console.log("Server is running at port "+port)

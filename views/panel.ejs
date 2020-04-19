@@ -139,9 +139,12 @@ body {
                    <ul class=" sidebar-nav">
                        <li><%=lt.name%></li>
                        <li><%=lt.email%></li>
-                       <button class="btn btn-danger">Delete</button>
+                       <form action="/panel/<%= lt._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
                    </ul>
                 </div>
+                <hr >
                 
             <% }) %>
        
