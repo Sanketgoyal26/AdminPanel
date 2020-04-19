@@ -67,7 +67,7 @@ app.post("/signup", function (req, res) {
 });
 app.post("/", passport.authenticate("local", {
     successRedirect: "/panel",
-    failureRedirect: "/"
+    failureRedirect: "/signup"
 }), function (req, res) {
     res.send("User is " + req.user.id);
 });
